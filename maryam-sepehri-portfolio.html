@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مریم سپهری | مدیر سئو و متخصص ارگانیک</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ─── TOKENS ─── */
+  :root {
+    --bg:        #0A0F14;
+    --surface:   #111820;
+    --surface2:  #162028;
+    --border:    #1E2E3A;
+    --teal:      #00C4A7;
+    --teal-dim:  #00896F;
+    --teal-glow: rgba(0,196,167,0.12);
+    --accent:    #1DDBD8;
+    --gold:      #F0C060;
+    --text:      #E8F0F4;
+    --text-sec:  #8BA8B8;
+    --text-muted:#4E6A7A;
+    --radius:    12px;
+    --radius-sm: 8px;
+    --font:      'Vazirmatn', 'Tahoma', sans-serif;
+  }
+
+  /* ─── RESET ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 3px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 40px;
+    background: rgba(10,15,20,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-size: 15px; font-weight: 700; color: var(--teal); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 500;
+    color: var(--text-sec); transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,196,167,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,196,167,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-glow {
+    position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,196,167,0.07) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal-glow); border: 1px solid rgba(0,196,167,0.3);
+    color: var(--teal); font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+  }
+  .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  h1 {
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 800; line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  h1 span { color: var(--teal); }
+  .hero-title-line {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-sec); font-weight: 500; margin-bottom: 24px;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--text-sec); line-height: 1.85;
+    max-width: 560px; margin-bottom: 36px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 26px; border-radius: var(--radius-sm);
+    font-family: var(--font); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: all .25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary {
+    background: var(--teal); color: #000;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--teal);
+    border: 1.5px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal-glow); }
+
+  /* HERO STATS CARD */
+  .hero-stats-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-stats-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--accent));
+  }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-size: 28px; font-weight: 800; color: var(--teal);
+    display: block; line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 6px; }
+  .stat-divider { grid-column: 1 / -1; height: 1px; background: var(--border); margin: 4px 0; }
+
+  .hero-domains {
+    margin-top: 24px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .domain-chip {
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px;
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-sec);
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--text-sec);
+    max-width: 620px; line-height: 1.85; margin-bottom: 48px;
+  }
+  .divider { width: 100%; height: 1px; background: var(--border); margin: 0 auto; }
+
+  /* ─── ABOUT ─── */
+  #about .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+  }
+  .about-text p { font-size: 15px; color: var(--text-sec); line-height: 1.9; margin-bottom: 16px; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .timeline {
+    display: flex; flex-direction: column; gap: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content:''; position:absolute; right:16px; top:0; bottom:0;
+    width:2px; background:var(--border);
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px;
+    padding-bottom: 28px;
+    position: relative;
+  }
+  .tl-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--surface2); border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--teal);
+    position: relative; z-index: 1;
+    flex-shrink: 0;
+  }
+  .tl-content { padding-top: 6px; }
+  .tl-year { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 4px; }
+  .tl-desc { font-size: 14px; color: var(--text-sec); line-height: 1.7; }
+
+  /* ─── SKILLS / SCOPE ─── */
+  #scope { background: var(--surface); }
+  .scope-full { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+
+  .scope-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .scope-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    transition: border-color .25s, transform .25s;
+    position: relative; overflow: hidden;
+  }
+  .scope-card:hover {
+    border-color: var(--teal-dim);
+    transform: translateY(-4px);
+  }
+  .scope-card::after {
+    content: '';
+    position: absolute; bottom: 0; right: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    opacity: 0; transition: opacity .25s;
+  }
+  .scope-card:hover::after { opacity: 1; }
+  .scope-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--teal-glow); border: 1px solid rgba(0,196,167,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 16px;
+  }
+  .scope-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .scope-card p { font-size: 13px; color: var(--text-sec); line-height: 1.75; }
+
+  /* ─── ECOSYSTEM ─── */
+  .ecosystem-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; margin-top: 0;
+  }
+  .ecosystem-table th {
+    background: var(--surface2); padding: 14px 20px;
+    font-size: 12px; font-weight: 700; color: var(--teal);
+    text-align: right; letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  .ecosystem-table td {
+    padding: 16px 20px; font-size: 14px; color: var(--text-sec);
+    border-bottom: 1px solid var(--border); text-align: right;
+  }
+  .ecosystem-table tr:last-child td { border-bottom: none; }
+  .ecosystem-table tr:hover td { background: var(--teal-glow); }
+  .eco-name { font-weight: 700; color: var(--text); }
+  .eco-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px;
+    font-weight: 600; background: var(--teal-glow); color: var(--teal);
+    border: 1px solid rgba(0,196,167,0.25);
+  }
+
+  /* ─── TEAM ─── */
+  #team { background: var(--surface); }
+  .team-full { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 40px; }
+  .team-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 20px 16px; text-align: center;
+    transition: border-color .2s;
+  }
+  .team-card:hover { border-color: var(--teal-dim); }
+  .team-num { font-size: 26px; font-weight: 800; color: var(--teal); display: block; }
+  .team-role { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+  .ops-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .ops-table th {
+    background: var(--surface2); padding: 12px 18px;
+    font-size: 12px; font-weight: 700; color: var(--teal);
+    text-align: right; border-bottom: 1px solid var(--border);
+  }
+  .ops-table td {
+    padding: 14px 18px; font-size: 13px; color: var(--text-sec);
+    border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  .ops-table tr:last-child td { border-bottom: none; }
+  .ops-table tr:hover td { background: rgba(0,196,167,0.04); }
+  .role-name { font-weight: 700; color: var(--text); font-size: 14px; }
+
+  /* ─── CASE STUDIES ─── */
+  .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .case-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 28px;
+    transition: border-color .25s, transform .25s;
+    position: relative;
+  }
+  .case-card:hover { border-color: var(--teal-dim); transform: translateY(-3px); }
+  .case-num {
+    font-size: 11px; font-weight: 800; color: var(--teal-dim);
+    letter-spacing: 0.1em; margin-bottom: 12px; display: block;
+  }
+  .case-card h3 {
+    font-size: 17px; font-weight: 700; margin-bottom: 16px; color: var(--text);
+  }
+  .case-row { margin-bottom: 12px; }
+  .case-label { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .case-val { font-size: 13px; color: var(--text-sec); line-height: 1.7; }
+  .case-evidence {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .ev-chip {
+    font-size: 11px; padding: 3px 9px; border-radius: 20px;
+    background: var(--teal-glow); border: 1px solid rgba(0,196,167,0.2);
+    color: var(--teal-dim);
+  }
+
+  /* ─── KEYWORDS ─── */
+  #keywords { background: var(--surface); }
+  .kw-full { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .kw-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--teal-glow); border: 1px solid rgba(0,196,167,0.2);
+    border-radius: var(--radius-sm); padding: 16px 20px;
+    margin-bottom: 32px; font-size: 13px; color: var(--text-sec); line-height: 1.7;
+  }
+  .kw-note-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .kw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kw-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 20px 18px;
+    transition: border-color .2s;
+  }
+  .kw-card:hover { border-color: var(--teal-dim); }
+  .kw-word { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .kw-type {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 20px; margin-bottom: 10px;
+    display: inline-block;
+  }
+  .kw-type.commercial { background: rgba(240,192,96,0.12); color: var(--gold); }
+  .kw-type.informational { background: var(--teal-glow); color: var(--teal); }
+  .kw-type.transactional { background: rgba(29,219,216,0.1); color: var(--accent); }
+  .kw-evidence { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .kw-evidence strong { color: var(--teal); }
+
+  /* ─── MONTHLY OPS ─── */
+  .ops-cycle {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .ops-step {
+    background: var(--surface); padding: 24px 20px;
+  }
+  .ops-step-num {
+    font-size: 11px; font-weight: 800; color: var(--teal-dim);
+    letter-spacing: 0.12em; margin-bottom: 8px; display: block;
+  }
+  .ops-step h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .ops-step p { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ─── KPI TABLE ─── */
+  .kpi-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; margin-top: 40px;
+  }
+  .kpi-table th {
+    background: var(--surface2); padding: 12px 18px;
+    font-size: 12px; font-weight: 700; color: var(--teal);
+    text-align: right; border-bottom: 1px solid var(--border);
+  }
+  .kpi-table td {
+    padding: 13px 18px; font-size: 13px; color: var(--text-sec);
+    border-bottom: 1px solid var(--border); text-align: right;
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .kpi-table tr:hover td { background: rgba(0,196,167,0.04); }
+  .kpi-name { font-weight: 600; color: var(--text); }
+
+  /* ─── GEO ─── */
+  .geo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .geo-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+  }
+  .geo-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+  .geo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .geo-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--text-sec); line-height: 1.6;
+  }
+  .geo-list li::before { content: '›'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--surface); }
+  .contact-full {
+    max-width: 1100px; margin: 0 auto; padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .contact-text h2 { font-size: 34px; font-weight: 800; margin-bottom: 16px; }
+  .contact-text h2 span { color: var(--teal); }
+  .contact-text p { font-size: 15px; color: var(--text-sec); line-height: 1.85; margin-bottom: 32px; }
+  .contact-links { display: flex; flex-direction: column; gap: 14px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); text-decoration: none;
+    transition: border-color .2s, background .2s;
+  }
+  .contact-link:hover {
+    border-color: var(--teal);
+    background: var(--teal-glow);
+  }
+  .cl-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--teal-glow); display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .cl-text { display: flex; flex-direction: column; }
+  .cl-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+  .cl-val { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 2px; }
+
+  .contact-summary {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 28px;
+    position: relative; overflow: hidden;
+  }
+  .contact-summary::before {
+    content: ''; position: absolute;
+    top: 0; right: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--accent));
+  }
+  .summary-title {
+    font-size: 14px; font-weight: 700; color: var(--teal);
+    margin-bottom: 20px; letter-spacing: 0.05em;
+  }
+  .summary-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .summary-list li {
+    display: flex; gap: 10px;
+    font-size: 13.5px; color: var(--text-sec); line-height: 1.65;
+  }
+  .summary-list li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+  .summary-types {
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted); line-height: 1.7;
+  }
+  .summary-types strong { color: var(--text-sec); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center; padding: 28px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer span { color: var(--teal-dim); }
+
+  /* ─── DATA GAP MARKER ─── */
+  .data-gap {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(240,192,96,0.1); border: 1px dashed rgba(240,192,96,0.4);
+    color: var(--gold); font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight-box {
+    background: var(--teal-glow); border: 1px solid rgba(0,196,167,0.2);
+    border-radius: var(--radius-sm); padding: 20px 24px;
+    margin: 24px 0; font-size: 14px; color: var(--text-sec); line-height: 1.8;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-stats-card { display: none; }
+    #about .about-grid { grid-template-columns: 1fr; }
+    .scope-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: repeat(3, 1fr); }
+    .cases-grid { grid-template-columns: 1fr; }
+    .kw-grid { grid-template-columns: 1fr 1fr; }
+    .ops-cycle { grid-template-columns: 1fr 1fr; }
+    .geo-grid { grid-template-columns: 1fr; }
+    .contact-full { grid-template-columns: 1fr; }
+    .section, .scope-full, .team-full, .kw-full { padding: 60px 20px; }
+    #hero { padding: 100px 20px 60px; }
+  }
+  @media (max-width: 600px) {
+    .scope-grid, .kw-grid, .ops-cycle { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">مریم سپهری | مدیر سئو</div>
+  <ul class="nav-links">
+    <li><a href="#about">معرفی</a></li>
+    <li><a href="#scope">حوزه تخصص</a></li>
+    <li><a href="#ecosystem">اکوسیستم</a></li>
+    <li><a href="#cases">نمونه‌کارها</a></li>
+    <li><a href="#keywords">کلمات کلیدی</a></li>
+    <li><a href="#contact">تماس</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">SEO Manager · Available for Collaboration</div>
+      <h1>مریم<br><span>سپهری</span></h1>
+      <div class="hero-title-line">SEO Manager &amp; SEO Lead &amp; Senior SEO Specialist</div>
+      <p class="hero-desc">
+        متخصص سئو و مدیر عملیات محتوا با بیش از هفت سال تجربه حرفه‌ای در اکوسیستم ۱۹کالا؛ 
+        از تولید محتوا تا مدیریت کامل چرخه سئو، تیم هیبریدی ۴۰ نفره و شش دامنه فعال.
+        تمرکز اصلی: رشد پایدار ارگانیک، Technical SEO، Audit، Reporting و GEO / AI Visibility.
+      </p>
+      <div class="hero-ctas">
+        <a href="#cases" class="btn btn-primary">مشاهده نمونه‌کارها</a>
+        <a href="#contact" class="btn btn-outline">ارتباط با من</a>
+      </div>
+    </div>
+    <div class="hero-stats-card">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-num">۱۳۹۶+</span>
+          <div class="stat-label">شروع تجربه محتوا</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">۱۴۰۰+</span>
+          <div class="stat-label">تمرکز تخصصی سئو</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">۴۰</span>
+          <div class="stat-label">نفر تیم هیبریدی</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">۱۱+</span>
+          <div class="stat-label">سال سابقه سایت</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">۶</span>
+          <div class="stat-label">دامنه فعال</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">۶</span>
+          <div class="stat-label">کیس استادی</div>
+        </div>
+      </div>
+      <div class="hero-domains">
+        <span class="domain-chip">19kala</span>
+        <span class="domain-chip">19kala Mag</span>
+        <span class="domain-chip">19Service</span>
+        <span class="domain-chip">19Tejarat</span>
+        <span class="domain-chip">19Hyper</span>
+        <span class="domain-chip">19Gold</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section">
+    <div class="section-label">ABOUT</div>
+    <h2 class="section-title">مسیر حرفه‌ای من</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          مسیر کاری‌ام در یک اکوسیستم واحد — <strong>اکوسیستم ۱۹کالا</strong> — شکل گرفته و عمق پیدا کرده است.
+          این به معنای شناخت واقعی از ساختار، چالش‌ها و چرخه رشد یک سایت بالغ است؛ نه تجربه پراکنده در چند شرکت مختلف.
+        </p>
+        <p>
+          از سال ۱۳۹۶ با نویسندگی و تولید محتوا آغاز کردم و از سال ۱۴۰۰ تمرکز تخصصی‌ام را روی سئو، تحلیل داده و 
+          مدیریت عملیات قرار دادم. در این مسیر، تیمی نزدیک به <strong>۴۰ نفر</strong> را در ساختار هیبریدی 
+          تهران و شیراز مدیریت کرده‌ام؛ شامل نیروهای سئو، محتوا، ویدئو، سوشال و سناریونویسی.
+        </p>
+        <p>
+          چیزی که ارائه می‌دهم یک <strong>سیستم سئوی قابل پیگیری</strong> است: Audit، تصمیم‌گیری داده‌محور، 
+          اجرا، گزارش‌دهی و بهبود مستمر. خروجی فقط محتوا نیست؛ رشد ارگانیک پایدار است.
+        </p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-dot">۱</div>
+          <div class="tl-content">
+            <div class="tl-year">۱۳۹۶ — شروع</div>
+            <div class="tl-desc">نویسندگی، تولید محتوا، ویرایش و ساختاردهی محتوا در حوزه‌های تکنولوژی و فروشگاهی</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">۲</div>
+          <div class="tl-content">
+            <div class="tl-year">۱۴۰۰ — تخصص سئو</div>
+            <div class="tl-desc">ورود تخصصی به سئو، مدیریت هم‌زمان تیم محتوا و سئو، تحلیل GSC، Keyword Gap، On-page و Technical</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">۳</div>
+          <div class="tl-content">
+            <div class="tl-year">رشد مدیریتی</div>
+            <div class="tl-desc">مدیریت عملیات سئو در ساختار هیبریدی و چندبخشی؛ تبدیل داده به تسک، کنترل اجرا، گزارش‌دهی و تصمیم‌گیری ماهانه</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-dot">۴</div>
+          <div class="tl-content">
+            <div class="tl-year">امروز</div>
+            <div class="tl-desc">SEO Management، Audit، Technical SEO، Reporting، GEO / AI Visibility و رشد سایت بالغ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="scope-full">
+    <div class="section-label">SEO MANAGEMENT SCOPE</div>
+    <h2 class="section-title">نقشه مسئولیت‌های سئو</h2>
+    <p class="section-desc">
+      مدیریت چرخه کامل سئو از تحلیل و Audit تا اجرا، گزارش‌دهی و تصمیم‌گیری بعدی.
+    </p>
+    <div class="scope-grid">
+      <div class="scope-card">
+        <div class="scope-icon">🔍</div>
+        <h3>Strategy &amp; Audit</h3>
+        <p>SEO Audit، Technical Audit، Content Audit، تحلیل رقبا و اولویت‌بندی مسیر رشد بر اساس داده واقعی</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">🗺️</div>
+        <h3>Keyword &amp; Page Architecture</h3>
+        <p>Keyword Research، Mapping، تحلیل Intent، طراحی Pillar Cluster و انتخاب دقیق صفحه هدف</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">⚙️</div>
+        <h3>Execution Management</h3>
+        <p>On-page SEO، Internal Linking، Content Refresh، تدوین Brief و کنترل کیفیت خروجی تیم</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">🛠️</div>
+        <h3>Technical SEO Follow-up</h3>
+        <p>Schema، Indexing، 404، Redirect Chain/Loop، Crawl Budget و Performance با هماهنگی تیم فنی</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">🔗</div>
+        <h3>Off-page &amp; Risk Management</h3>
+        <p>تحلیل رقبا، انتخاب رسانه رپورتاژ، Anchor Distribution، Toxic Links، Disavow و کنترل ریسک بک‌لینک</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">📊</div>
+        <h3>Measurement &amp; Reporting</h3>
+        <p>GSC، GA4، KPI، گزارش مدیریتی ماهانه، Audit Report و تعیین اولویت ماه بعد بر اساس داده</p>
+      </div>
+    </div>
+
+    <!-- MONTHLY OPS CYCLE -->
+    <div style="margin-top: 48px;">
+      <div class="section-label" style="margin-bottom:16px;">MONTHLY CYCLE</div>
+      <div class="ops-cycle">
+        <div class="ops-step">
+          <span class="ops-step-num">۰۱</span>
+          <h4>Keyword Gap</h4>
+          <p>استخراج از GSC، رقبا، محصولات جدید، ترندها و رفتار کاربران</p>
+        </div>
+        <div class="ops-step">
+          <span class="ops-step-num">۰۲</span>
+          <h4>Content Action</h4>
+          <p>مقاله جدید، Content Refresh، Pillar/Cluster و Internal Linking</p>
+        </div>
+        <div class="ops-step">
+          <span class="ops-step-num">۰۳</span>
+          <h4>Technical &amp; Off-page</h4>
+          <p>پیگیری خطاهای فنی، Disavow، رپورتاژ و مدیریت ریسک بک‌لینک</p>
+        </div>
+        <div class="ops-step">
+          <span class="ops-step-num">۰۴</span>
+          <h4>Reporting</h4>
+          <p>تحلیل KPI، گزارش مدیریتی و تعیین تسک‌های ماه بعد</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section">
+    <div class="section-label">ONE ECOSYSTEM / MULTI-SITE SEO</div>
+    <h2 class="section-title">اکوسیستم ۱۹کالا</h2>
+    <p class="section-desc">
+      تجربه کاری من در یک اکوسیستم واحد شکل گرفته اما شامل چند سایت، چند Intent، 
+      چند مدل تجاری و چند نوع صفحه بوده است.
+    </p>
+    <table class="ecosystem-table">
+      <thead>
+        <tr>
+          <th>پروژه</th>
+          <th>نوع</th>
+          <th>دامنه سئویی</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="eco-name">۱۹کالا (19kala)</span></td>
+          <td><span class="eco-badge">E-commerce بالغ</span></td>
+          <td>Shop، دسته‌بندی، محصول، مجله، Technical SEO و رشد صفحات درآمدزا</td>
+        </tr>
+        <tr>
+          <td><span class="eco-name">۱۹کالامگ (Mag)</span></td>
+          <td><span class="eco-badge">Content SEO</span></td>
+          <td>Blog SEO، Keyword Mapping، Content Refresh، Pillar Cluster و Internal Linking</td>
+        </tr>
+        <tr>
+          <td><span class="eco-name">۱۹سرویس (19Service)</span></td>
+          <td><span class="eco-badge">Service SEO</span></td>
+          <td>Landing خدمات، Intent خدماتی، On-page و گزارش‌دهی</td>
+        </tr>
+        <tr>
+          <td><span class="eco-name">۱۹تجارت (19Tejarat)</span></td>
+          <td><span class="eco-badge">Corporate / B2B</span></td>
+          <td>صفحات تجاری، تحقیق کلمات و ساختاردهی رشد ارگانیک</td>
+        </tr>
+        <tr>
+          <td><span class="eco-name">۱۹هایپر (19Hyper)</span></td>
+          <td><span class="eco-badge">Hypermarket</span></td>
+          <td>ساختار محتوایی/فروشگاهی و تجربه در حوزه هایپرمارکت</td>
+        </tr>
+        <tr>
+          <td><span class="eco-name">۱۹گلد (19Gold)</span></td>
+          <td><span class="eco-badge">Pre-launch</span></td>
+          <td>برنامه‌ریزی اولیه، تحقیق کلمات، معماری محتوا و آماده‌سازی ورود به بازار</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box" style="margin-top:32px;">
+      <strong style="color:var(--teal);">تجربه صنعتی:</strong> موبایل · لپ‌تاپ · اکسسوری · لوازم خانگی · لوازم آرایشی · هایپرمارکت · 
+      خدمات گارانتی · B2B تجاری · طلا و جواهر · محتوای آموزشی و راهنمای خرید —
+      شامل Intent‌های Commercial، Informational، Transactional، Comparison، Local/Service و Brand-driven
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-full">
+    <div class="section-label">HYBRID TEAM MANAGEMENT</div>
+    <h2 class="section-title">مدیریت تیم ۴۰ نفره</h2>
+    <p class="section-desc">
+      مدیریت ساختار هیبریدی تهران و شیراز شامل پنج بخش تخصصی با محوریت رشد ارگانیک و هماهنگی با اهداف تجاری.
+    </p>
+    <div class="team-grid">
+      <div class="team-card">
+        <span class="team-num">۷</span>
+        <div class="team-role">تیم سئو</div>
+      </div>
+      <div class="team-card">
+        <span class="team-num">۱۵+</span>
+        <div class="team-role">محتوای سایت</div>
+      </div>
+      <div class="team-card">
+        <span class="team-num">۸</span>
+        <div class="team-role">تیم ویدئو</div>
+      </div>
+      <div class="team-card">
+        <span class="team-num">۸</span>
+        <div class="team-role">تیم سوشال</div>
+      </div>
+      <div class="team-card">
+        <span class="team-num">۵</span>
+        <div class="team-role">Technical / Product</div>
+      </div>
+    </div>
+
+    <table class="ops-table">
+      <thead>
+        <tr>
+          <th>بخش</th>
+          <th>وظایف اصلی</th>
+          <th>نقش مدیریتی من</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="role-name">SEO</span></td>
+          <td>Keyword Mapping، GSC، On-page، Cannibalization، Technical Follow-up، Off-page</td>
+          <td>مدیریت تسک، تحلیل، اولویت‌بندی، اجرا/پیگیری و گزارش‌دهی</td>
+        </tr>
+        <tr>
+          <td><span class="role-name">Content Website</span></td>
+          <td>مقاله، محصول/دسته‌بندی، Refresh، اجرای Brief و استانداردهای سئو</td>
+          <td>برنامه تولید، کنترل کیفیت، هماهنگی با سئو و انتشار</td>
+        </tr>
+        <tr>
+          <td><span class="role-name">Technical / Product</span></td>
+          <td>Schema، Indexing، Redirect، Performance، صفحات محصول و Landing</td>
+          <td>تعریف نیاز، مستندسازی، ارسال تسک، تست بعد از اجرا</td>
+        </tr>
+        <tr>
+          <td><span class="role-name">Video</span></td>
+          <td>سناریو، ویدئو محصول/آموزشی و اتصال به مقالات و صفحات هدف</td>
+          <td>اولویت‌بندی موضوعات و کنترل ارتباط ویدئو با SEO</td>
+        </tr>
+        <tr>
+          <td><span class="role-name">Social</span></td>
+          <td>پروموت محتوای مهم، بازخورد کاربر و تقویت دیده‌شدن</td>
+          <td>هماهنگی موضوعات با Shop/Mag و استفاده از بازخوردها در سئو</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="section">
+    <div class="section-label">CASE STUDIES</div>
+    <h2 class="section-title">نمونه‌کارها و کیس استادی‌ها</h2>
+    <p class="section-desc">
+      هر کیس یک چرخه کامل مسئله → تحلیل → تصمیم → اجرا → نتیجه را نشان می‌دهد.
+    </p>
+    <div class="cases-grid">
+
+      <div class="case-card">
+        <span class="case-num">CASE 01</span>
+        <h3>SEO Operations Management</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">هماهنگی چند تیم و چند نوع خروجی در ساختار هیبریدی تهران–شیراز</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">طراحی Workflow، اولویت‌بندی تسک‌ها، مدیریت تیم، QC و گزارش‌گیری</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">خروجی</div>
+          <div class="case-val">چرخه قابل پیگیری از نیازسنجی تا انتشار، بهینه‌سازی، پروموت و تحلیل نتیجه</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">Trello Workflow</span>
+          <span class="ev-chip">تقویم محتوا</span>
+          <span class="ev-chip">شیت برنامه تولید</span>
+          <span class="ev-chip">مستندات تیمی</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num">CASE 02</span>
+        <h3>Keyword Gap &amp; Mapping</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">نبود پوشش کافی برای برخی Query‌ها و احتمال انتخاب صفحه اشتباه</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">تحلیل Intent، رقبا و URLهای موجود؛ تصمیم New/Refresh/Link/Redirect</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">خروجی</div>
+          <div class="case-val">Keyword Gap Sheet، Mapping، Brief و تقویت صفحات هدف با پوشش کامل Intent</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">Keyword Gap Sheet</span>
+          <span class="ev-chip">Pillar / Cluster Map</span>
+          <span class="ev-chip">Content Mapping</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num">CASE 03</span>
+        <h3>Mature Site Growth</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">صفحات قدیمی، افت عملکرد، Cannibalization و ساختار پیچیده لینک داخلی در سایت ۱۱+ ساله</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">تحلیل GSC، Content Refresh، اصلاح ساختار، Redirect و بازبینی لینک داخلی</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نتیجه قابل اندازه‌گیری</div>
+          <div class="case-val">رشد Click یک صفحه قدیمی از <strong style="color:var(--teal)">۳.۴۹k</strong> به <strong style="color:var(--teal)">۸.۶۴k</strong> پس از Refresh اصولی</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">GSC Before/After</span>
+          <span class="ev-chip">Cannibalization Mapping</span>
+          <span class="ev-chip">Redirect Log</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num">CASE 04</span>
+        <h3>Technical SEO — Schema &amp; Indexing</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">خطاهای Schema پس از تغییرات فنی/افزونه‌ای، 404، Redirect Chain/Loop و Crawl Budget</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">تشخیص، مستندسازی، اولویت‌بندی، ارسال تسک فنی و Validation بعد از اجرا</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">خروجی</div>
+          <div class="case-val">کاهش Invalid/Warning در GSC، حفظ سلامت Structured Data و بهبود Crawl Budget</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">GSC Rich Results</span>
+          <span class="ev-chip">Technical Brief</span>
+          <span class="ev-chip">Validation Log</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num">CASE 05</span>
+        <h3>Off-page &amp; Backlink Risk</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">تقویت صفحات هدف با کنترل بودجه و ریسک Anchor/Backlink</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">تحلیل رقبا و رسانه‌ها، انتخاب صفحه هدف، Anchor و تصمیم Disavow</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">خروجی</div>
+          <div class="case-val">کمپین رپورتاژ کنترل‌شده، مدیریت ریسک بک‌لینک و حفظ سلامت دامنه</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">Media Selection Sheet</span>
+          <span class="ev-chip">Anchor Sheet</span>
+          <span class="ev-chip">Toxic Link Report</span>
+          <span class="ev-chip">Disavow Log</span>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num">CASE 06</span>
+        <h3>GEO / AI Visibility</h3>
+        <div class="case-row">
+          <div class="case-label">مسئله</div>
+          <div class="case-val">تغییر رفتار جست‌وجو و نیاز به دیده‌شدن در پاسخ‌های AI (ChatGPT، Gemini، Perplexity)</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">نقش من</div>
+          <div class="case-val">ساختار پاسخ‌محور، Entity Coverage، FAQ، Query Mapping و Prompt Monitoring</div>
+        </div>
+        <div class="case-row">
+          <div class="case-label">خروجی</div>
+          <div class="case-val">آمادگی بهتر محتوا برای AI Search، ذکر منبع و پاسخ‌های ساختاریافته در Overview</div>
+        </div>
+        <div class="case-evidence">
+          <span class="ev-chip">AI Screenshot</span>
+          <span class="ev-chip">SERP Evidence</span>
+          <span class="ev-chip">Query Sheet</span>
+          <span class="ev-chip">Prompt Monitor</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KEYWORDS -->
+<section id="keywords">
+  <div class="kw-full">
+    <div class="section-label">KEYWORDS &amp; EVIDENCE</div>
+    <h2 class="section-title">کلمات کلیدی کار شده و شواهد</h2>
+    <div class="kw-note">
+      <div class="kw-note-icon">💡</div>
+      <div>
+        این بخش نمونه‌ای از کلمات کلیدی تخصصی و رقابتی است که در اکوسیستم ۱۹کالا روی آن‌ها کار شده. 
+        شواهد شامل جایگاه SERP، داده‌های GSC و تصاویر مستند موجود در پورت‌فولیوی اصلی است.
+        <br><span class="data-gap">⚠ داده‌ای که باید تکمیل شود: عدد دقیق رتبه / تاریخ اندازه‌گیری برای هر کلمه</span>
+      </div>
+    </div>
+    <div class="kw-grid">
+      <div class="kw-card">
+        <div class="kw-word">قیمت گوشی موبایل</div>
+        <span class="kw-type commercial">Commercial</span>
+        <div class="kw-evidence">جایگاه در SERP · شواهد GSC موجود<br><strong>نوع صفحه:</strong> دسته‌بندی/PLP</div>
+      </div>
+      <div class="kw-card">
+        <div class="kw-word">خرید گوشی</div>
+        <span class="kw-type transactional">Transactional</span>
+        <div class="kw-evidence">جایگاه در SERP · شواهد GSC موجود<br><strong>نوع صفحه:</strong> Category/Shop</div>
+      </div>
+      <div class="kw-card">
+        <div class="kw-word">گوشی خوب چی بخرم</div>
+        <span class="kw-type informational">Informational</span>
+        <div class="kw-evidence">Long-tail · جایگاه SERP موجود<br><strong>نوع صفحه:</strong> راهنمای خرید</div>
+      </div>
+      <div class="kw-card">
+        <div class="kw-word">بهترین لپ‌تاپ</div>
+        <span class="kw-type commercial">Commercial</span>
+        <div class="kw-evidence">رقابتی · Pillar Topic<br><strong>نوع صفحه:</strong> مقاله + دسته</div>
+      </div>
+      <div class="kw-card">
+        <div class="kw-word">خرید لوازم خانگی</div>
+        <span class="kw-type transactional">Transactional</span>
+        <div class="kw-evidence">E-commerce Intent<br><strong>نوع صفحه:</strong> Category</div>
+      </div>
+      <div class="kw-card">
+        <div class="kw-word">گارانتی گوشی</div>
+        <span class="kw-type informational">Informational / Service</span>
+        <div class="kw-evidence">Service Intent · صفحه خدماتی<br><strong>نوع صفحه:</strong> Service Landing</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; text-align: center;">
+      <span class="data-gap">⚠ برای تکمیل این بخش: نام کلمه کلیدی + جایگاه رتبه + تاریخ اندازه‌گیری + لینک GSC یا Screenshot را اضافه کن</span>
+    </div>
+
+    <!-- KPI TABLE -->
+    <table class="kpi-table" style="margin-top:48px;">
+      <thead>
+        <tr>
+          <th>KPI</th>
+          <th>منبع</th>
+          <th>دوره پایش</th>
+          <th>اقدام مرتبط</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="kpi-name">Organic Clicks</span></td><td>GSC</td><td>ماهانه</td><td>Refresh / On-page</td></tr>
+        <tr><td><span class="kpi-name">Impressions</span></td><td>GSC</td><td>ماهانه</td><td>Keyword Gap / Content</td></tr>
+        <tr><td><span class="kpi-name">CTR</span></td><td>GSC</td><td>ماهانه</td><td>Title / Meta</td></tr>
+        <tr><td><span class="kpi-name">Average Position</span></td><td>GSC</td><td>ماهانه</td><td>Internal Link / On-page</td></tr>
+        <tr><td><span class="kpi-name">Indexed Pages / Errors</span></td><td>GSC</td><td>ماهانه</td><td>Technical Fix</td></tr>
+        <tr><td><span class="kpi-name">Backlink Risk</span></td><td>Ahrefs / Semrush</td><td>فصلی</td><td>Disavow / Monitor</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GEO -->
+<section id="geo">
+  <div class="section">
+    <div class="section-label">GEO / AI VISIBILITY</div>
+    <h2 class="section-title">دیده‌شدن در مدل‌های هوش مصنوعی</h2>
+    <p class="section-desc">
+      سئوی امروز فقط رتبه‌گیری کلاسیک نیست. محتوا باید برای پاسخ‌های AI هم آماده باشد.
+    </p>
+    <div class="geo-grid">
+      <div class="geo-card">
+        <h3>🤖 هدف GEO</h3>
+        <ul class="geo-list">
+          <li>آماده‌سازی محتوا برای ChatGPT، Gemini، Perplexity و AI Search</li>
+          <li>نه فقط رتبه‌گیری کلاسیک؛ بلکه ذکر شدن در پاسخ‌های AI</li>
+          <li>ساختار پاسخ‌محور (Answer-first) برای Query‌های رقابتی</li>
+        </ul>
+      </div>
+      <div class="geo-card">
+        <h3>⚡ اقدامات اجرایی</h3>
+        <ul class="geo-list">
+          <li>Entity Coverage و FAQ بر اساس سوال‌های واقعی کاربران</li>
+          <li>Schema مناسب برای Rich Result و AI Parsing</li>
+          <li>Prompt Monitoring برای پایش دیده‌شدن برند در AI</li>
+          <li>Commercial / Informational Query Mapping</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-full">
+    <div class="contact-text">
+      <div class="section-label">CONTACT</div>
+      <h2>بریم <span>باهم</span><br>کار کنیم</h2>
+      <p>
+        اگر به مدیریت سئو، رشد ارگانیک پایدار، Audit یا راه‌اندازی سیستم گزارش‌دهی سئو نیاز دارید،
+        خوشحال می‌شوم درباره همکاری صحبت کنیم.
+      </p>
+      <div class="contact-links">
+        <a href="tel:+989178036468" class="contact-link">
+          <div class="cl-icon">📞</div>
+          <div class="cl-text">
+            <span class="cl-label">تماس مستقیم</span>
+            <span class="cl-val" dir="ltr">+98 917 803 6468</span>
+          </div>
+        </a>
+        <a href="mailto:sepehri.office@gmail.com" class="contact-link">
+          <div class="cl-icon">✉️</div>
+          <div class="cl-text">
+            <span class="cl-label">ایمیل</span>
+            <span class="cl-val">sepehri.office@gmail.com</span>
+          </div>
+        </a>
+        <a href="#" class="contact-link">
+          <div class="cl-icon">💼</div>
+          <div class="cl-text">
+            <span class="cl-label">LinkedIn</span>
+            <span class="cl-val">Maryam Sepehri — SEO Manager</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-summary">
+      <div class="summary-title">آنچه ارائه می‌دهم</div>
+      <ul class="summary-list">
+        <li>سیستم سئوی قابل پیگیری: Audit، تصمیم، اجرا، گزارش و بهبود مستمر</li>
+        <li>مدیریت تیم محتوا و سئو در ساختارهای هیبریدی</li>
+        <li>رشد ارگانیک پایدار در سایت‌های بالغ و پرصفحه</li>
+        <li>تصمیم‌گیری داده‌محور بر اساس GSC، GA4 و ابزارهای تخصصی</li>
+        <li>Technical SEO، Audit و Reporting مدیریتی دقیق</li>
+        <li>آمادگی محتوا برای GEO و جست‌وجوی AI</li>
+      </ul>
+      <div class="summary-types">
+        <strong>مناسب برای:</strong> E-commerce · Content-heavy Sites · Service & Corporate · Multi-site · B2B · سایت‌های بالغ در حال رشد
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>پورت‌فولیوی مریم سپهری · <span>SEO Manager</span> · مدیریت سئو و رشد ارگانیک · ۱۴۰۴</p>
+</footer>
+
+</body>
+</html>
