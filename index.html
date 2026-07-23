@@ -132,18 +132,22 @@ h1,h2,h3,h4,p{ margin:0; }
 }
 .nav-cta:hover{ background:var(--teal); color:#04140F !important; border-color:var(--teal); }
 .nav-toggle{ display:none; background:none; border:none; color:var(--text); cursor:pointer; padding:8px; }
+.nav-toggle.open .icon-open{ display:none; }
+.nav-toggle.open .icon-close{ display:block !important; }
 .nav-toggle svg{ width:24px; height:24px; }
 
 @media (max-width:900px){
   .nav-links{
-    position:fixed; top:74px; inset-inline:0; bottom:0;
+    position:fixed; top:74px; left:0; right:0; bottom:0;
     background:var(--bg); flex-direction:column; justify-content:flex-start;
     padding:36px 28px; gap:26px; transform:translateY(-8px);
     opacity:0; pointer-events:none; transition:.25s ease;
+    z-index:60; overflow-y:auto; -webkit-overflow-scrolling:touch;
   }
   .nav-links.open{ opacity:1; pointer-events:auto; transform:translateY(0); }
   .nav-links a{ font-size:19px; }
   .nav-toggle{ display:block; }
+  body.menu-open{ overflow:hidden; height:100vh; }
 }
 
 .hero{
@@ -424,81 +428,6 @@ footer p{ font-size:12.5px; color:var(--text-faint); font-family:var(--font-mono
   .section{ padding:76px 0; }
 }
 
-/* ============================================
-   Mobile responsiveness improvements + hamburger fixes
-   ============================================ */
-
-/* قفل اسکرول body وقتی منوی موبایل باز است */
-body.nav-open{ overflow:hidden; }
-
-/* جابجایی آیکون همبرگر ↔ ضربدر بر اساس وضعیت aria-expanded */
-.nav-toggle{ display:none; }
-.nav-toggle .icon-close{ display:none; }
-.nav-toggle[aria-expanded="true"] .icon-open{ display:none; }
-.nav-toggle[aria-expanded="true"] .icon-close{ display:block; }
-
-/* تبلت و پایین‌تر */
-@media (max-width:900px){
-  .nav-toggle{ display:block; }
-  .hero{ padding:132px 0 68px; }
-  .stat-strip{ margin-top:52px; }
-}
-
-/* موبایل ≤ 560px */
-@media (max-width:560px){
-  .container{ padding:0 18px; }
-  .section{ padding:60px 0; }
-  .section-head{ margin-bottom:40px; }
-
-  .hero{ padding:118px 0 52px; }
-  .hero h1{ font-size:clamp(34px,9vw,46px); line-height:1.12; }
-  .hero .lede{ font-size:15.5px; margin-top:20px; }
-  .hero-cta{ gap:10px; }
-  .btn{ padding:12px 20px; font-size:14px; }
-
-  .card{ padding:22px 20px; }
-  .card h3{ font-size:16.5px; }
-
-  .cs-card-head{ padding:22px 20px; gap:14px; }
-  .cs-id{ min-width:0; font-size:12px; }
-  .cs-title-wrap h3{ font-size:16px; }
-  .cs-body-inner{ padding:0 20px 26px; }
-
-  .cycle-step{ padding:24px 20px; }
-  .cycle-card{ padding:20px 18px; }
-
-  .contact-link{ padding:14px 16px; gap:12px; }
-  .contact-link .val{ font-size:14px; word-break:break-word; }
-
-  .lightbox{ padding:16px; }
-  .lightbox-close{ top:12px; inset-inline-end:12px; width:38px; height:38px; }
-
-  .chip{ padding:6px 12px; font-size:12px; }
-  .industry-tag{ padding:7px 14px; font-size:12.5px; }
-}
-
-/* موبایل کوچک ≤ 480px */
-@media (max-width:480px){
-  .stat-strip{ grid-template-columns:1fr; }
-  .stat-cell{ border-inline-start:none !important; border-bottom:1px solid var(--border); }
-  .stat-cell:last-child{ border-bottom:none; }
-  .team-stats{ grid-template-columns:1fr 1fr; gap:10px; }
-  .team-stat{ padding:18px 12px; }
-  .team-stat .num{ font-size:22px; }
-  .team-stat .lbl{ font-size:11.5px; }
-}
-
-/* موبایل خیلی کوچک ≤ 400px */
-@media (max-width:400px){
-  .container{ padding:0 16px; }
-  .nav-inner{ height:64px; }
-  .brand{ font-size:15px; }
-  .brand span{ font-size:10px; }
-  .nav-links{ top:64px; }
-  .hero{ padding:108px 0 44px; }
-  .status-pill{ font-size:11px; padding:6px 12px; }
-}
-
 </style>
 </head>
 <body>
@@ -506,7 +435,7 @@ body.nav-open{ overflow:hidden; }
 <nav class="nav">
   <div class="container nav-inner">
     <div class="brand">مریم سپهری<span>SEO MANAGER PORTFOLIO</span></div>
-    <ul class="nav-links" id="primary-nav">
+    <ul class="nav-links">
       <li><a href="#about">معرفی</a></li>
       <li><a href="#scope">حوزه تخصص</a></li>
       <li><a href="#cycle">چرخه ماهانه</a></li>
@@ -516,9 +445,9 @@ body.nav-open{ overflow:hidden; }
       <li><a href="#keywords">کلمات کلیدی</a></li>
       <li><a href="#contact" class="nav-cta">ارتباط با من</a></li>
     </ul>
-    <button class="nav-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="primary-nav">
-      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    <button class="nav-toggle" aria-label="باز کردن منو">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 </nav>
@@ -1358,14 +1287,14 @@ body.nav-open{ overflow:hidden; }
     </div>
 
     <div class="team-stats reveal" style="grid-template-columns:repeat(3,minmax(0,1fr));">
-      <div class="team-stat"><div class="num">بالای ۱۰۰۰</div><div class="lbl">کلمه کلیدی در رتبه ۱ تا ۴ گوگل</div></div>
+      <div class="team-stat"><div class="num">بالای ۱۰۰۰</div><div class="lbl">کلمه کلیدی در رتبه ۱ تا ۵ گوگل (بسته به سختی کلمه)</div></div>
       <div class="team-stat"><div class="num">Informational</div><div class="lbl">سهم غالب این کلمات</div></div>
       <div class="team-stat"><div class="num">محدودتر</div><div class="lbl">سهم کلمات Transactional / Commercial</div></div>
     </div>
 
     <div class="kw-note reveal">
       <span class="ic">💡</span>
-      <p>در مجموع پروژه‌ها، بالای ۱۰۰۰ کلمه کلیدی در رتبه ۱ تا ۴ گوگل ثبت شده که بخش قابل‌توجهی از آن‌ها Informational هستند؛ سهم کلمات کلیدی Transactional و Commercial در این مجموعه محدودتر است. نمونه‌های زیر بخشی از کلمات کلیدی تخصصی و رقابتی است که روی آن‌ها کار شده؛ برخی مستقیماً از شواهد تصویری کیس‌استادی‌های بالا (به‌ویژه GEO / AI Overview) استخراج شده‌اند. فهرست کامل کلمات کلیدی، جایگاه دقیق در SERP و تاریخ اندازه‌گیری هر Query، به‌درخواست کارفرما و در قالب فایل تکمیلی ارائه می‌شود.</p>
+      <p>در مجموع پروژه‌ها، بالای ۱۰۰۰ کلمه کلیدی در رتبه ۱ تا ۵ گوگل (بسته به سختی و رقابت کلمه) ثبت شده که بخش قابل‌توجهی از آن‌ها Informational هستند؛ سهم کلمات کلیدی Transactional و Commercial در این مجموعه محدودتر است. نمونه‌های زیر بخشی از کلمات کلیدی تخصصی و رقابتی است که روی آن‌ها کار شده؛ برخی مستقیماً از شواهد تصویری کیس‌استادی‌های بالا (به‌ویژه GEO / AI Overview) استخراج شده‌اند. فهرست کامل کلمات کلیدی، جایگاه دقیق در SERP و تاریخ اندازه‌گیری هر Query، به‌درخواست کارفرما و در قالب فایل تکمیلی ارائه می‌شود.</p>
     </div>
 
     <div class="kw-grid">
@@ -1501,7 +1430,7 @@ body.nav-open{ overflow:hidden; }
       <div class="reveal">
         <div class="eyebrow">CONTACT</div>
         <h2 style="font-size:clamp(26px,3vw,36px);font-weight:800;">بریم باهم کار کنیم</h2>
-        <p style="color:var(--text-muted);margin-top:16px;font-size:16px;">اگر به مدیریت سئو، رشد ارگانیک پایدار، Audit یا راه‌اندازی سیستم گزارش‌دهی سئو نیاز دارید، خوشحال می‌شوم درباره همکاری صحبت کنیم.</p>
+        <p style="color:var(--text-muted);margin-top:16px;font-size:16px;">اگر به مدیریت سئو، رشد ارگانیک پایدار، Audit، خوشحال می‌شوم درباره همکاری صحبت کنیم.</p>
 
         <div class="contact-links">
           <a href="tel:+989178036468" class="contact-link">
@@ -1562,13 +1491,13 @@ body.nav-open{ overflow:hidden; }
 
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
+  function setMenu(open){
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+  }
   if(toggle && links){
-    function setMenu(open){
-      links.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
-      document.body.classList.toggle('nav-open', open);
-    }
     toggle.addEventListener('click', function(){
       setMenu(!links.classList.contains('open'));
     });
@@ -1576,11 +1505,10 @@ body.nav-open{ overflow:hidden; }
       a.addEventListener('click', function(){ setMenu(false); });
     });
     document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && links.classList.contains('open')) setMenu(false);
+      if(e.key === 'Escape') setMenu(false);
     });
-    // بستن خودکار منو در صورت تغییر اندازه صفحه به دسکتاپ
     window.addEventListener('resize', function(){
-      if(window.innerWidth > 900 && links.classList.contains('open')) setMenu(false);
+      if(window.innerWidth > 900) setMenu(false);
     });
   }
 
